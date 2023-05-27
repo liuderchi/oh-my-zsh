@@ -2,7 +2,6 @@
 
 ![](./screenshot.gif)
 
-[![Travis](https://img.shields.io/travis/g-plane/zsh-yarn-autocompletions.svg?style=flat-square)](https://travis-ci.org/g-plane/zsh-yarn-autocompletions/)
 [![license](https://img.shields.io/github/license/g-plane/zsh-yarn-autocompletions.svg?style=flat-square)](https://github.com/g-plane/zsh-yarn-autocompletions/blob/master/LICENSE)
 [![Github Releases](https://img.shields.io/github/downloads/g-plane/zsh-yarn-autocompletions/latest/total.svg?style=flat-square)](https://github.com/g-plane/zsh-yarn-autocompletions/releases)
 
@@ -11,6 +10,7 @@
 - yarn run
 - yarn remove
 - yarn add
+- yarn why
 
 You can customize the autocompletion of `yarn add` command.
 It's configurable.
@@ -30,7 +30,7 @@ page and download the latest binary files.
 
 Unzip the compressed file you downloaded.
 
-For 1.x users, please run:
+For 1.x (or above) users, please run:
 
 ```shell
 $ ./install.sh $ZSH_CUSTOM/plugins
@@ -58,11 +58,20 @@ Restart your terminal.
 
 ### With a plugin manager
 
+#### [zinit](https://github.com/zdharma/zinit)
+
+Update your `.zshrc` file with the following line:
+
+```zsh
+zinit ice atload"zpcdreplay" atclone'./zplug.zsh'
+zinit light g-plane/zsh-yarn-autocompletions
+```
+
 #### [zplug](https://github.com/zplug/zplug)
 
 Update your `.zshrc` file with the following line:
 
-```
+```zsh
 zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
 ```
 
@@ -136,6 +145,32 @@ exclude:
 ```
 
 Keep in mind that any sections are optional.
+
+## Build from source
+
+Make sure that you've installed [rustup](https://rustup.rs/) first and use rustup to install Rust.
+
+Next, follow the steps below:
+
+```
+git clone https://github.com/g-plane/zsh-yarn-autocompletions.git
+cd zsh-yarn-autocompletions
+cargo build --release
+mkdir -p $ZSH_CUSTOM/plugins/yarn-autocompletions
+cp ./yarn-autocompletions.plugin.zsh $ZSH_CUSTOM/plugins/yarn-autocompletions/
+cp ./target/release/yarn-autocompletions $ZSH_CUSTOM/plugins/yarn-autocompletions/
+```
+
+Then, edit your `.zshrc` like this:
+
+```diff
+plugins=(
+  # ... your other plugins
++ yarn-autocompletions
+)
+```
+
+Restart your terminal.
 
 ## Contribution
 
