@@ -325,7 +325,7 @@ is-at-least 2.30 "$git_version" \
   || alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
 alias gpv='git push --verbose'
 alias gpoat='git push origin --all && git push origin --tags'
-alias gpod='git push origin --delete'
+# alias gpod='git push origin --delete'
 alias ggpush='git push origin "$(git_current_branch)"'
 
 function ggp() {
